@@ -1,0 +1,37 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	background-color: orange;
+}
+
+.header {
+	color: white;
+	text-align: center;
+	margin: 20px;
+	font-size: 50px;
+}
+
+.move {
+	color: white;
+	text-align: center;
+	font-size: 30px;
+}
+
+
+#board {
+	display: flex;
+	justify-content: center;
+	margin: 50px;
+}
+
+
+.square {
+	background-color: rgb(173, 216, 230);
+	width: 200px;
+	height: 200px;
+	border: 5px white solid;
+}
+
+.square:hover {
+	background-color: rgb(119, 187, 210);
+}
