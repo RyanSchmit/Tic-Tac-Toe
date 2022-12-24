@@ -30,8 +30,21 @@
 	width: 200px;
 	height: 200px;
 	border: 5px white solid;
+	
 }
 
 .square:hover {
 	background-color: rgb(119, 187, 210);
+}
+
+.taken-square {
+	font-size: 100px;
+	text-align: center;
+	color: green;
+	width: 200px;
+	height: 200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(173, 216, 230);
 }
