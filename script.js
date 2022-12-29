@@ -1,10 +1,7 @@
 // tsc script.ts --outFile script.js
 // create board 
-// return object for all 9 squares with interface above
-// mark with X or O
-// write function to see if three in a row using position attribute 
-var board = document.getElementById('board');
-var createBoard = function (board) {
+var createBoard = function () {
+    var board = document.getElementById('board');
     var squares = [];
     var currentPosition = 0;
     // create 3 divs with 3 squares in each
@@ -17,10 +14,38 @@ var createBoard = function (board) {
             squares.push(newSquare);
             var squareDiv = document.createElement('div');
             squareDiv.classList.add('square');
+            squareDiv.setAttribute('id', newSquare['position'].toString());
             group.appendChild(squareDiv);
+            squareDiv.addEventListener('click', playerMarking);
             currentPosition += 1;
         }
     }
     return squares;
 };
-console.log(createBoard(board));
+var squares = createBoard();
+// mark with X or O and change squares object
+var playerOneTurn = true;
+function playerMarking() {
+    var move = document.querySelector('.move');
+    var takenSquare = document.createElement('div');
+    takenSquare.classList.add('taken-square');
+    this.appendChild(takenSquare);
+    if (squares[this.id]['taken']) {
+        return;
+    }
+    if (playerOneTurn) {
+        takenSquare.textContent = 'X';
+        squares[this.id]['player'] = 1;
+        playerOneTurn = false;
+        move.textContent = 'Player 2 move';
+    }
+    else {
+        takenSquare.textContent = 'O';
+        squares[this.id]['player'] = 2;
+        playerOneTurn = true;
+        move.textContent = 'Player 1 move';
+    }
+    squares[this.id]['taken'] = true;
+    console.log(squares);
+}
+// write function to see if three in a row using position attribute 
