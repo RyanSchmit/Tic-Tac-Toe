@@ -14,21 +14,22 @@
 .move {
 	color: white;
 	text-align: center;
-	font-size: 30px;
+	font-size: 25px;
 }
 
 
 #board {
 	display: flex;
 	justify-content: center;
-	margin: 50px;
+	margin: 30px;
+	user-select: none;
 }
 
 
 .square {
 	background-color: rgb(173, 216, 230);
-	width: 200px;
-	height: 200px;
+	width: 150px;
+	height: 150px;
 	border: 5px white solid;
 	
 }
@@ -41,8 +42,8 @@
 	font-size: 100px;
 	text-align: center;
 	color: green;
-	width: 200px;
-	height: 200px;
+	width: 150px;
+	height: 150px;
 	display: flex;
 	justify-content: center;
 	align-items: center;

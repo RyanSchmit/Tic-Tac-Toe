@@ -7,8 +7,9 @@ interface Square {
 }
 
 // create board 
+const board = document.getElementById('board');
+
 const createBoard = (): Square[] => {
-	const board = document.getElementById('board');
 	const squares: Square[] = [];
 	let currentPosition: number = 0;
 	// create 3 divs with 3 squares in each
@@ -32,18 +33,18 @@ const createBoard = (): Square[] => {
 
 const squares: Square[] = createBoard();
 
-
 // mark with X or O and change squares object
 let playerOneTurn: boolean = true;
+let gameOver: boolean = false;
 
 function playerMarking() {
+	if (squares[this.id]['taken'] || gameOver) {
+		return;
+	}
 	const move = document.querySelector('.move');
 	const takenSquare = document.createElement('div');
 	takenSquare.classList.add('taken-square');
 	this.appendChild(takenSquare);
-	if (squares[this.id]['taken']) {
-		return;
-	}
 	if (playerOneTurn) {
 		takenSquare.textContent = 'X';
 		squares[this.id]['player'] = 1;
@@ -56,12 +57,29 @@ function playerMarking() {
 		move.textContent = 'Player 1 move';
 	}
 	squares[this.id]['taken'] = true;
-	console.log(squares);
+	checkWin();
 }
 
 // write function to see if three in a row using position attribute 
 function checkWin() {
-
+	const winningSquares: number[][] = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+	const playerOneSquares: number[] = squares.filter((s) => s['player'] === 1).map((s) => s['position']).sort((a, b) => a - b);
+	const playerTwoSquares: number[] = squares.filter((s) => s['player'] === 2).map((s) => s['position']).sort((a, b) => a - b);
+	for (const winningSquare of winningSquares) {
+		if (playerOneSquares.includes(winningSquare[0]) && playerOneSquares.includes(winningSquare[1]) && playerOneSquares.includes(winningSquare[2])) {
+			alert("Player One wins");
+			gameOver = true;
+		} else if (playerTwoSquares.includes(winningSquare[0]) && playerTwoSquares.includes(winningSquare[1]) && playerTwoSquares.includes(winningSquare[2])) {
+			alert("Player Two wins");
+			gameOver = true;
+		}
+	}
 }
 
-
+// Clear board for new game 
+// function newGame() {
+// 	board.innerHTML = "";
+// 	const newSquares: Square[] = createBoard();
+// 	console.log(newSquares);
+// 	return newSquares;
+// }
